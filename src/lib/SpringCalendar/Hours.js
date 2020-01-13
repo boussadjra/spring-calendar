@@ -14,6 +14,7 @@ const Hours = ({ day }) => {
 			if (moment(event.startDate).isSame(day.fullDayString, 'day')) {
 				return event;
 			}
+			return null;
 		});
 		let gridColumnStart = 3;
 		let ev = e.map(event => {
@@ -28,23 +29,25 @@ const Hours = ({ day }) => {
 			tmp.style.height = `${(tmp.endDate.hour() - tmp.startDate.hour()) * 48 + 4}px`;
 			return tmp;
 		});
-
 		ev = ev.map((event, i) => {
 			let k = 0;
 			while (k < i) {
-				if (event.startDate.hour() >= ev[k].startDate.hour() && event.startDate.hour() <= ev[k].endDate.hour()
-				|| ev[k].startDate.hour() >= event.startDate.hour() && ev[k].startDate.hour() <= event.endDate.hour()
+				if (
+					(event.startDate.hour() >= ev[k].startDate.hour() &&
+						event.startDate.hour() <= ev[k].endDate.hour()) ||
+					(ev[k].startDate.hour() >= event.startDate.hour() && ev[k].startDate.hour() <= event.endDate.hour())
 				) {
 					gridColumnStart++;
 					event.style.gridColumnStart = gridColumnStart;
-					event.style.marginLeft='12px' 
+					event.style.marginLeft = '12px';
 				}
 				k++;
 			}
 			return event;
 		});
+		
 		setCustomEvents(ev);
-	}, [events, day]);
+	}, [events, day, moment]);
 	/***
 	 *
 	 */

@@ -33,9 +33,48 @@ const Days = ({ month }) => {
 			belongsToThisMonth: false,
 		});
 	}
-
+	const selectDay = (day, belongsToThisMonth) => {
+		if (belongsToThisMonth) {
+			setSelectedDay(day);
+		} else {
+			let d;
+			if (day.index < 7) {
+				if (day.month + 1 > 12) {
+					d = { ...day, month: 1, fullDayString: getFullDayString(day.year + 1, 1, day.index) };
+				} else {
+					d = {
+						...day,
+						month: day.month + 1,
+						fullDayString: getFullDayString(day.year, day.month + 1, day.index),
+					};
+				}
+			} else {
+				if (day.month - 1 === 0) {
+					d = { ...day, month: 12, fullDayString: getFullDayString(day.year - 1, 12, day.index) };
+				} else {
+					d = {
+						...day,
+						month: day.month - 1,
+						fullDayString: getFullDayString(day.year, day.month - 1, day.index),
+					};
+				}
+			}
+			setSelectedDay(d);
+			console.log(d);
+		}
+	};
+	/***
+	 *
+	 *
+	 */
+	const getFullDayString = (year, month, day) => {
+		return `${year}-${month}-${day}`;
+	};
+	/********
+	 *
+	 */
 	return daysOfMonth.map((dm, i) => {
-		let fullDayString = `${year}-${month + 1}-${dm.dayIndex}`;
+		let fullDayString = getFullDayString(year, month + 1, dm.dayIndex);
 		let isToday = moment().isSame(fullDayString, 'day');
 
 		let day = {
@@ -48,23 +87,28 @@ const Days = ({ month }) => {
 			if (moment(event.startDate).isSame(day.fullDayString, 'day')) {
 				return event;
 			}
+			return null;
 		});
 		return (
 			<div
-				onClick={() => setSelectedDay(day)}
+				onClick={() => selectDay(day, dm.belongsToThisMonth)}
 				key={`dm${dm}${i}`}
 				className={`spring-calendar-day ${
 					dm.belongsToThisMonth ? 'spring-calendar-day-in-month' : 'spring-calendar-day-out-month'
 				} 
             `}
 			>
-				<div className={`${isToday ? 'spring-calendar-today  spring-centered-content': ''}  spring-centered-content'`}>
+				<div
+					className={`${
+						isToday ? 'spring-calendar-today  spring-centered-content' : ''
+					}  spring-centered-content'`}
+				>
 					<span>{dm.dayIndex}</span>
-					{evts.length>0 && <sup >
-						<div className="spring-calendar-day-events">
-						{ evts.length}
-						</div>
-						</sup>}
+					{evts.length > 0 && (
+						<sup>
+							<div className="spring-calendar-day-events">{evts.length}</div>
+						</sup>
+					)}
 				</div>
 			</div>
 		);

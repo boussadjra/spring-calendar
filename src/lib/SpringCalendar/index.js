@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 //import { useSelector } from 'react-redux';
 import Months from './Months';
 import Month from './Month';
 import { CalendarProvider } from './CalendarContext';
 import Hours from './Hours';
 
-const SpringCalendar = ({ locale,events }) => {
-	const [year, setYear] = useState(2019);
+const SpringCalendar = ({ locale, events ,color}) => {
+	const [year, setYear] = useState(2020);
 	const [months, setMonths] = useState(
 		moment.months().map((label, index) => {
 			return { label, index };
@@ -18,21 +18,22 @@ const SpringCalendar = ({ locale,events }) => {
 	const [headerContent, setHeaderContent] = useState('year');
 	const [selectedMonth, setSelectedMonth] = useState(null);
 	const [selectedDay, setSelectedDay] = useState(null);
-//	const locale = useSelector(state => state.locale);
+	//	const locale = useSelector(state => state.locale);
 
-	window.moment = moment;
+	//window.moment = moment;
 	/**
 	 *
 	 * useEffect hooooooook
 	 */
 	useEffect(() => {
-		moment.locale(locale);
+		document.documentElement.style.setProperty("--primary", color);
+		moment.locale(locale);console.log(locale)
 		setMonths(
 			moment.months().map((label, index) => {
 				return { label, index };
 			})
 		);
-	}, [locale]);
+	}, [locale,color]);
 	/********** */
 	useEffect(() => {
 		if (selectedMonth) {
@@ -61,10 +62,10 @@ const SpringCalendar = ({ locale,events }) => {
 	};
 
 	const HEADER_CONTENT = {
-		year: <h1>{year}</h1>,
+		year: <h2>{year}</h2>,
 		month:
-			selectedMonth !== null ? <h1>{moment(`${year}-${selectedMonth.index + 1}`).format('MMMM YYYY')}</h1> : null,
-		day: selectedDay !== null ? <h1>{moment(selectedDay.fullDayString).format('LL')}</h1> : null,
+			selectedMonth !== null ? <h2>{moment(`${year}-${selectedMonth.index + 1}`).format('MMMM YYYY')}</h2> : null,
+		day: selectedDay !== null ? <h2>{moment(selectedDay.fullDayString).format('LL')}</h2> : null,
 	};
 	/******* */
 
@@ -117,7 +118,7 @@ const SpringCalendar = ({ locale,events }) => {
 				let nextDay = moment(selectedDay.fullDayString).add(1, 'days');
 
 				setYear(nextDay.year());
-				let d = nextDay.toDate();
+				//let d = nextDay.toDate();
 				setSelectedMonth({ index: nextDay.month() + 1, label: moment.months()[nextDay.month()] });
 
 				setSelectedDay({
@@ -138,7 +139,7 @@ const SpringCalendar = ({ locale,events }) => {
 		setHeaderContent('month');
 		setMainContent('month');
 		let index = moment().month();
-		selectedMonth ? setSelectedMonth(null): setSelectedMonth({ index: index, label: moment.months[index] });
+		selectedMonth ? setSelectedMonth(null) : setSelectedMonth({ index: index, label: moment.months()[index] });
 	};
 
 	const selectYear = () => {
@@ -189,8 +190,7 @@ const SpringCalendar = ({ locale,events }) => {
 						</div>
 					</div>
 				</div>
-
-				{DYNAMIC_CONTENT[mainContent]}
+				<div className="spring-main-content">{DYNAMIC_CONTENT[mainContent]}</div>
 			</div>
 		</CalendarProvider>
 	);
