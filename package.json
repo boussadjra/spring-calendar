@@ -1,6 +1,6 @@
 {
     "name": "spring-calendar",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "private": false,
     "homepage": "http://boussadjra.github.io/spring-calendar",
     "main": "dist/index.js",
