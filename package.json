@@ -1,12 +1,16 @@
 {
     "name": "spring-calendar",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": false,
     "homepage": "http://boussadjra.github.io/spring-calendar",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "babel": {
-        "presets": ["react", "env", "stage-2"]
+        "presets": [
+            "react",
+            "env",
+            "stage-2"
+        ]
     },
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
