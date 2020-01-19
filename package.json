@@ -55,5 +55,6 @@
         "babel-preset-react": "^6.24.1",
         "babel-preset-stage-2": "^6.24.1",
         "gh-pages": "^2.2.0"
-    }
+    },
+    "keywords": ["calendar", "react", "react-calendar", "spring-calendar", "react component", "full-calendar"]
 }
