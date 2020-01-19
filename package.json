@@ -29,7 +29,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "SET NODE_ENV=production && mkdir dist && npx babel src/lib --out-dir dist --copy-files",
-        "deploy": "gh-pages -b gh-pages -d dist",
+        "predeploy": "react-scripts build",
+        "deploy": "gh-pages -b gh-pages -d build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
