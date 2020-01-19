@@ -38,5 +38,5 @@ let events=[
         endDate:'2020-01-15 10:00',
     }
 ]
-const App =()=> <SpringCalendar locale="en" events={events} color="#002651" />;
+const App =()=> <SpringCalendar locale="en" events={events} color="#752688" />;
 export default App

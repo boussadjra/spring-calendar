@@ -5,6 +5,10 @@
     "homepage": "http://boussadjra.github.io/spring-calendar",
     "main": "dist/index.js",
     "module": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/boussadjra/spring-calendar"
+    },
     "babel": {
         "presets": [
             "react",
@@ -25,7 +29,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "SET NODE_ENV=production && mkdir dist && npx babel src/lib --out-dir dist --copy-files",
-        "deploy": "gh-pages -d build",
+        "deploy": "gh-pages -b master -d dist",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
