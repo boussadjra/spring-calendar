@@ -30,3 +30,7 @@ let events=[
 const App =()=> <SpringCalendar locale="en" events={events} color="#002651" />;
 export default App
 ```
+
+##Demo 
+
+[Spring Calendar demo](https://boussadjra.github.io/spring-calendar/)
