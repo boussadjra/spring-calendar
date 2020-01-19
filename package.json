@@ -1,6 +1,6 @@
 {
     "name": "spring-calendar",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "private": false,
     "homepage": "http://boussadjra.github.io/spring-calendar",
     "main": "dist/index.js",
@@ -56,5 +56,12 @@
         "babel-preset-stage-2": "^6.24.1",
         "gh-pages": "^2.2.0"
     },
-    "keywords": ["calendar", "react", "react-calendar", "spring-calendar", "react component", "full-calendar"]
+    "keywords": [
+        "calendar",
+        "react",
+        "react-calendar",
+        "spring-calendar",
+        "react component",
+        "full-calendar"
+    ]
 }
