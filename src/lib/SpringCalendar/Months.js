@@ -5,11 +5,11 @@ const Months = () => {
 	const { months } = useContext(CalendarContext);
 
 	return (
-		<>
+		<React.Fragment>
 			{months.map((month, i) => {
 				return <Month month={month} key={`m${i}`} />;
 			})}
-		</>
+		</React.Fragment>
 	);
 };
 
