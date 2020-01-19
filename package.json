@@ -2,6 +2,12 @@
     "name": "spring-calendar",
     "version": "0.1.0",
     "private": false,
+    "homepage": "http://boussadjra.github.io/spring-calendar",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "babel": {
+        "presets": ["react", "env", "stage-2"]
+    },
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.4.0",
@@ -14,7 +20,8 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "build": "SET NODE_ENV=production && rm -rf dist && mkdir dist && npx babel src/lib --out-dir dist --copy-files",
+        "deploy": "gh-pages -d build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -32,5 +39,12 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "babel-preset-stage-2": "^6.24.1",
+        "gh-pages": "^2.2.0"
     }
 }
