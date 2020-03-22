@@ -8,6 +8,8 @@ import { CalendarProvider } from './CalendarContext';
 import Hours from './Hours';
 
 const SpringCalendar = ({ locale, events ,color}) => {
+
+	window.moment=moment;
 	const [year, setYear] = useState(2020);
 	const [months, setMonths] = useState(
 		moment.months().map((label, index) => {
@@ -27,7 +29,6 @@ const SpringCalendar = ({ locale, events ,color}) => {
 	 */
 	useEffect(() => {
 		document.documentElement.style.setProperty("--primary", color);
-		moment.locale(locale);console.log(locale)
 		setMonths(
 			moment.months().map((label, index) => {
 				return { label, index };
@@ -156,7 +157,7 @@ const SpringCalendar = ({ locale, events ,color}) => {
 	 * JSX template
 	 */
 	return (
-		<CalendarProvider value={{ moment, year, months, events, setSelectedMonth, setSelectedDay }}>
+		<CalendarProvider value={{ moment, year, months, events,selectedMonth ,setSelectedMonth ,setSelectedDay }}>
 			<div className="spring-calendar-wrapper">
 				<div className="spring-calendar-year-wrapper">
 					<div

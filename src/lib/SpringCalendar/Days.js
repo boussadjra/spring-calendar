@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import CalendarContext from './CalendarContext';
 
-const Days = ({ month }) => {
+const Days = ({ month, extended }) => {
 	const { moment, year, events, setSelectedDay } = useContext(CalendarContext);
-
 	let startDay = moment(`${year}-${month + 1}`)
 		.startOf('month')
 		.day();
@@ -70,6 +69,18 @@ const Days = ({ month }) => {
 	const getFullDayString = (year, month, day) => {
 		return `${year}-${month}-${day}`;
 	};
+
+	/** */
+	const getBorderRadius = e => {
+		if (e.startsThisDay) {
+			return '4px 0 0 4px';
+		} else if (e.endsThisDay) {
+			return '0 4px  4px 0';
+		} else {
+			return '0';
+		}
+	};
+
 	/********
 	 *
 	 */
@@ -83,12 +94,40 @@ const Days = ({ month }) => {
 			year: year,
 			fullDayString,
 		};
-		let evts = events.filter(event => {
+
+		/**
+		 * custom events
+		 */
+
+		let evts = events
+			.map((e, i) => {
+				return { ...e, offestY: i };
+			})
+			.filter(event => {
+				if (
+					moment(event.startDate).isSame(day.fullDayString, 'day') ||
+					moment(event.endDate).isSame(day.fullDayString, 'day') ||
+					(moment(event.startDate).isBefore(day.fullDayString, 'day') &&
+						moment(event.endDate).isAfter(day.fullDayString, 'day'))
+				) {
+					return event;
+				}
+				return null;
+			});
+
+		evts = evts.map(event => {
 			if (moment(event.startDate).isSame(day.fullDayString, 'day')) {
-				return event;
+				return { ...event, startsThisDay: true };
+			} else if (moment(event.endDate).isSame(day.fullDayString, 'day')) {
+				return { ...event, endsThisDay: true };
 			}
-			return null;
+			return event;
 		});
+
+		/**
+		 *
+		 * return JSX template
+		 */
 		return (
 			<div
 				onClick={() => selectDay(day, dm.belongsToThisMonth)}
@@ -104,10 +143,29 @@ const Days = ({ month }) => {
 					}  spring-centered-content'`}
 				>
 					<span>{dm.dayIndex}</span>
-					{evts.length > 0 && (
+					{evts.length > 0 && !extended && (
 						<sup>
-							<div className="spring-calendar-day-events">{evts.length}</div>
+							<div className="spring-calendar-day-events-count">{evts.length}</div>
 						</sup>
+					)}
+					{extended && evts.length > 0 && (
+						<ul className="spring-calendar-day-events">
+							{evts.map(
+								(e, i) =>
+									i < 3 && (
+										<li
+											className="spring-calendar-event"
+											key={i}
+											style={{
+												top: `${e.offestY * 24 + 24}px`,
+												borderRadius: getBorderRadius(e),
+											}}
+										>
+											{e.startsThisDay ? e.title : ''}
+										</li>
+									)
+							)}
+						</ul>
 					)}
 				</div>
 			</div>

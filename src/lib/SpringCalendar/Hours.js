@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import CalendarContext from './CalendarContext';
 
 const Hours = ({ day }) => {
-	const { events, moment } = useContext(CalendarContext);
+	const { events, moment,year,selectedMonth } = useContext(CalendarContext);
 
 	const [customEvents, setCustomEvents] = useState([]);
-
+console.log(selectedMonth)
 	/****
 	 *
 	 */
@@ -71,13 +71,13 @@ const Hours = ({ day }) => {
 				);
 			})}
 
-			{customEvents.map((event, k) => {
+			{/* {customEvents.map((event, k) => {
 				return (
 					<div key={`e${k}`} style={event.style} className="spring-calendar-event">
 						{event.title}
 					</div>
 				);
-			})}
+			})} */}
 		</div>
 	);
 };

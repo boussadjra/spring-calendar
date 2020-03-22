@@ -1,7 +1,7 @@
 :root {
     // primary: #3041d6;
     // --primary: #3a0751;
-    --primary: #28c7fa;
+    --primary: #5118ac;
 }
 
 * {
@@ -16,6 +16,20 @@ body {
     box-sizing: border-box;
     margin: 0;
     overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
 }
 
 .spring-calendar-wrapper {
@@ -156,6 +170,7 @@ body {
 }
 
 .spring-calendar-month-wrapper-extended {
+    position: relative;
     height: 100%;
     grid-template-rows: 64px 48px repeat(6, 128px);
     grid-column-start: 1;
@@ -175,10 +190,32 @@ body {
     .spring-calendar-day {
         font-size: 9pt;
         text-align: center;
-        border: 1px solid #dfdfdf;
+        border-top: 1px solid #d3d2d2;
+        border-right: 1px solid #dfdede;
+        border-bottom: 1px solid #dfdede;
         align-items: flex-start;
         padding-top: 4px;
         position: relative;
+        .spring-calendar-day-events {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            row-gap: 4px;
+            height: 76px;
+            overflow: hidden;
+        }
+        .spring-calendar-event {
+            list-style: none;
+            color: white;
+            background: var(--primary);
+            padding: 4px;
+            // border-radius: 4px;
+            position: absolute;
+            left: 0px;
+            width: calc(100% + 1px);
+            &:empty {
+                height: 22px;
+            }
+        }
     }
     .spring-calendar-day-in-month {
         color: #6d6c6c;
@@ -190,7 +227,7 @@ body {
     }
 }
 
-.spring-calendar-day-events {
+.spring-calendar-day-events-count {
     background: #e14444;
     color: #ffffff;
     width: 16px;
@@ -213,8 +250,9 @@ body {
     /*********************/
     grid-column-start: 1;
     grid-column-end: 5;
+    /*************/
     display: grid;
-    grid-template-columns: 65px 20px repeat(auto-fit, 1fr);
+    grid-template-columns: 65px 20px repeat(30, 1fr);
     grid-template-rows: repeat(24, 50px);
     width: 100%;
     padding: 8px 12px;

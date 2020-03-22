@@ -7,7 +7,7 @@ const Month = ({ month,extended }) => {
     const {moment,setSelectedMonth}=useContext(CalendarContext)
 
 	return (
-		<div className={`  ${extended?'spring-calendar-month-wrapper-extended':'' } spring-calendar-month-wrapper `}>
+		<div className={`${extended?'spring-calendar-month-wrapper-extended':'' } spring-calendar-month-wrapper`}>
 			<div
 				className="spring-calendar-month spring-centered-content"
 				onClick={() => extended?setSelectedMonth(null):setSelectedMonth(month) }
@@ -21,7 +21,7 @@ const Month = ({ month,extended }) => {
 					</div>
 				);
 			})}
-		{month &&	<Days month={month.index} />}
+		{month &&	<Days month={month.index} extended={extended} />}
 		</div>
 	);
 };

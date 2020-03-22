@@ -1,4 +1,4 @@
-##Spring Calendar
+## Spring Calendar
  It's a React based component which provides the functionality of a full-calendar that 
  shows daily events. 
 
@@ -31,6 +31,6 @@ const App =()=> <SpringCalendar locale="en" events={events} color="#002651" />;
 export default App
 ```
 
-##Demo 
+## Demo 
 
 [Spring Calendar demo](https://boussadjra.github.io/spring-calendar/)
