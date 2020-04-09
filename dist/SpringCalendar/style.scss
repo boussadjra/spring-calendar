@@ -18,7 +18,7 @@ body {
     overflow-x: hidden;
 }
 
-.spring-calendar-wrapper {
+.sc-wrapper {
     height: 100%;
     width: 100%;
     background: rgb(219, 219, 223);
@@ -32,7 +32,7 @@ body {
     padding: 20px;
 }
 
-.spring-calendar-year-wrapper {
+.sc-year-wrapper {
     grid-area: header;
     width: 100%;
     line-height: 64px;
@@ -44,7 +44,7 @@ body {
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    .spring-calendar-year {
+    .sc-year {
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -53,10 +53,10 @@ body {
         height: 48px;
         border-radius: 4px;
     }
-    .spring-calendar-month-year {
+    .sc-month-year {
         width: 300px;
     }
-    .spring-calendar-toggle {
+    .sc-toggle {
         display: flex;
         /* justify-self: flex-end; */
         width: 300px;
@@ -96,7 +96,7 @@ body {
     grid-gap: 20px;
 }
 
-.spring-calendar-month-wrapper {
+.sc-month-wrapper {
     height: 200px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -104,7 +104,7 @@ body {
     background: #f3f3f3;
     border-radius: 4px;
     box-shadow: 1px 1px 5px #aaa;
-    .spring-calendar-month {
+    .sc-month {
         cursor: pointer;
         grid-column-start: 1;
         grid-column-end: 8;
@@ -116,14 +116,14 @@ body {
         text-transform: uppercase;
         border-radius: 4px 4px 0 0;
     }
-    .spring-calendar-weekday {
+    .sc-weekday {
         font-size: 9pt;
         text-align: center;
         color: #222;
         padding: 4px;
         text-transform: uppercase;
     }
-    .spring-calendar-day {
+    .sc-day {
         font-size: 9pt;
         cursor: pointer;
         display: flex;
@@ -135,11 +135,11 @@ body {
             filter: brightness(120%);
         }
     }
-    .spring-calendar-day-in-month {
+    .sc-day-in-month {
         color: #6d6c6c;
         font-weight: bolder;
     }
-    .spring-calendar-today {
+    .sc-today {
         background: #000e9c;
         color: #46eeb3;
         height: 32px;
@@ -155,24 +155,24 @@ body {
     position: relative;
 }
 
-.spring-calendar-month-wrapper-extended {
+.sc-month-wrapper-extended {
     height: 100%;
     grid-template-rows: 64px 48px repeat(6, 128px);
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 5;
-    .spring-calendar-month {
+    .sc-month {
         height: 100%;
         font-size: 12pt;
     }
-    .spring-calendar-weekday {
+    .sc-weekday {
         font-size: 11pt;
         text-align: center;
         color: #222;
         padding: 4px;
     }
-    .spring-calendar-day {
+    .sc-day {
         font-size: 9pt;
         text-align: center;
         border: 1px solid #dfdfdf;
@@ -180,17 +180,17 @@ body {
         padding-top: 4px;
         position: relative;
     }
-    .spring-calendar-day-in-month {
+    .sc-day-in-month {
         color: #6d6c6c;
         font-weight: bolder;
     }
-    .spring-calendar-today {
+    .sc-today {
         height: 40px;
         width: 40px;
     }
 }
 
-.spring-calendar-day-events {
+.sc-day-events {
     background: #e14444;
     color: #ffffff;
     width: 16px;
@@ -205,7 +205,7 @@ body {
     box-shadow: 1px 1px 10px rgb(156, 154, 154);
 }
 
-.spring-calendar-hours-wrapper {
+.sc-hours-wrapper {
     background-color: transparent;
     background-image: linear-gradient(0deg, transparent 24%, #efefef 25%, #efefef 26%, transparent 27%, transparent 74%, #efefef 75%, #efefef 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, #efefef 25%, #efefef 26%, transparent 27%, transparent 74%, #efefef 75%, #efefef 76%, transparent 77%, transparent);
     height: 100%;
@@ -221,7 +221,7 @@ body {
     // background: #f3f3f3;
     border-radius: 4px;
     box-shadow: 1px 1px 5px #aaa;
-    .spring-calendar-hour {
+    .sc-hour {
         grid-column-start: 1;
         grid-column-end: 1;
         display: flex;
@@ -262,7 +262,7 @@ body {
             z-index: 2;
         }
     }
-    .spring-calendar-event {
+    .sc-event {
         grid-column-start: 3;
         white-space: nowrap;
         height: 100px;

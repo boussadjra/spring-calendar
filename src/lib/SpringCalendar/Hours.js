@@ -62,10 +62,10 @@ console.log(selectedMonth)
 	 * JSX template
 	 */
 	return (
-		<div className="spring-calendar-hours-wrapper">
+		<div className="sc-hours-wrapper">
 			{dayHours.map((hour, i) => {
 				return (
-					<div key={`h${i}`} className="spring-calendar-hour">
+					<div key={`h${i}`} className="sc-hour">
 						{hour.label}
 					</div>
 				);
@@ -73,7 +73,7 @@ console.log(selectedMonth)
 
 			{/* {customEvents.map((event, k) => {
 				return (
-					<div key={`e${k}`} style={event.style} className="spring-calendar-event">
+					<div key={`e${k}`} style={event.style} className="sc-event">
 						{event.title}
 					</div>
 				);

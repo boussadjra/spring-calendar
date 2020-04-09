@@ -28,11 +28,11 @@ var Month = function Month(_ref) {
 
 	return _react2.default.createElement(
 		'div',
-		{ className: '  ' + (extended ? 'spring-calendar-month-wrapper-extended' : '') + ' spring-calendar-month-wrapper ' },
+		{ className: '  ' + (extended ? 'sc-month-wrapper-extended' : '') + ' sc-month-wrapper ' },
 		_react2.default.createElement(
 			'div',
 			{
-				className: 'spring-calendar-month spring-centered-content',
+				className: 'sc-month spring-centered-content',
 				onClick: function onClick() {
 					return extended ? setSelectedMonth(null) : setSelectedMonth(month);
 				}
@@ -42,7 +42,7 @@ var Month = function Month(_ref) {
 		moment.weekdaysShort().map(function (weekday, j) {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'spring-calendar-weekday spring-centered-content', key: 'wd' + j },
+				{ className: 'sc-weekday spring-centered-content', key: 'wd' + j },
 				weekday
 			);
 		}),

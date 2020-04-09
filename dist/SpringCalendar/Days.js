@@ -112,12 +112,12 @@ var Days = function Days(_ref) {
 					return selectDay(day, dm.belongsToThisMonth);
 				},
 				key: 'dm' + dm + i,
-				className: 'spring-calendar-day ' + (dm.belongsToThisMonth ? 'spring-calendar-day-in-month' : 'spring-calendar-day-out-month') + ' \n            '
+				className: 'sc-day ' + (dm.belongsToThisMonth ? 'sc-day-in-month' : 'sc-day-out-month') + ' \n            '
 			},
 			_react2.default.createElement(
 				'div',
 				{
-					className: (isToday ? 'spring-calendar-today  spring-centered-content' : '') + '  spring-centered-content\''
+					className: (isToday ? 'sc-today  spring-centered-content' : '') + '  spring-centered-content\''
 				},
 				_react2.default.createElement(
 					'span',
@@ -129,7 +129,7 @@ var Days = function Days(_ref) {
 					null,
 					_react2.default.createElement(
 						'div',
-						{ className: 'spring-calendar-day-events' },
+						{ className: 'sc-day-events' },
 						evts.length
 					)
 				)

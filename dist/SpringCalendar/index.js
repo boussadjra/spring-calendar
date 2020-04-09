@@ -223,14 +223,14 @@ var SpringCalendar = function SpringCalendar(_ref) {
 		{ value: { moment: _momentWithLocales2.default, year: year, months: months, events: events, setSelectedMonth: setSelectedMonth, setSelectedDay: setSelectedDay } },
 		_react2.default.createElement(
 			'div',
-			{ className: 'spring-calendar-wrapper' },
+			{ className: 'sc-wrapper' },
 			_react2.default.createElement(
 				'div',
-				{ className: 'spring-calendar-year-wrapper' },
+				{ className: 'sc-year-wrapper' },
 				_react2.default.createElement(
 					'div',
 					{
-						className: 'spring-calendar-year ' + (selectedMonth || selectedDay ? 'spring-calendar-month-year' : '')
+						className: 'sc-year ' + (selectedMonth || selectedDay ? 'sc-month-year' : '')
 					},
 					_react2.default.createElement(PrevButton, { onClick: function onClick() {
 							return gotoPrev();
@@ -242,7 +242,7 @@ var SpringCalendar = function SpringCalendar(_ref) {
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'spring-calendar-toggle' },
+					{ className: 'sc-toggle' },
 					_react2.default.createElement(
 						'div',
 						{

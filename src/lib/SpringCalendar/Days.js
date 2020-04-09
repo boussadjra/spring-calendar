@@ -1,176 +1,78 @@
 import React, { useContext } from 'react';
 import CalendarContext from './CalendarContext';
+import { useState } from 'react';
+const Days = ({ month }) => {
+	const { selectDay } = useContext(CalendarContext);
+	const [indexDayToShowEvents, setIndexDayToShowEvents] = useState(-1);
 
-const Days = ({ month, extended }) => {
-	const { moment, year, events, setSelectedDay } = useContext(CalendarContext);
-	let startDay = moment(`${year}-${month + 1}`)
-		.startOf('month')
-		.day();
-	let endDay = moment(`${year}-${month + 1}`)
-		.endOf('month')
-		.day();
-	let daysOfMonth = [...Array(moment(`${year}-${month + 1}`).daysInMonth())].map((x, k) => {
-		return {
-			dayIndex: k + 1,
-			belongsToThisMonth: true,
-		};
-	});
+	return (
+		<>
+			{month.weekday > 0 && (
+				<div className="sc-day sc-day-in-month" style={{ gridColumnStart: `span ${month.weekday}` }} />
+			)}
+			{month.days.map((day, dayIndex) => {
+				return (
+					<div
+						key={day.index}
+						onClick={event => {
+							window.target = event.target;
 
-	let prevMonthCountDays =
-		month > 0 ? moment(`${year}-${month}`).daysInMonth() : moment(`${year - 1}-12`).daysInMonth();
+							if (month.extended) {
+								dayIndex === indexDayToShowEvents
+									? setIndexDayToShowEvents(-1)
+									: setIndexDayToShowEvents(dayIndex);
+							} else {
+								selectDay(day);
+							}
+						}}
+						className={`${day.isToday ? 'sc-today  spring-centered-content' : ''} sc-day sc-day-in-month`}
+					>
+						<div>{day.index}</div>
+						{day.events.length > 0 && (
+							<sup>
+								<div className="sc-day-events-count">{day.events.length}</div>
+							</sup>
+						)}
+						{month.extended && day.events.length > 0 && (
+							<div className="sc-day-events ">
+								{day.events.map(
+									(e, i) =>
+										i < 3 && (
+											<span className="sc-event" key={i}>
+												{e.title}
+											</span>
+										)
+								)}
+								{day.events.length > 3 && (
+									<span className="sc-event-more-indicator">+{day.events.length - 3}</span>
+								)}
 
-	for (let index = 0; index < startDay; index++) {
-		daysOfMonth.unshift({
-			dayIndex: prevMonthCountDays,
-			belongsToThisMonth: false,
-		});
-		prevMonthCountDays--;
-	}
-	for (let index = 1; index <= 6 - endDay; index++) {
-		daysOfMonth.push({
-			dayIndex: index,
-			belongsToThisMonth: false,
-		});
-	}
-	const selectDay = (day, belongsToThisMonth) => {
-		if (belongsToThisMonth) {
-			setSelectedDay(day);
-		} else {
-			let d;
-			if (day.index < 7) {
-				if (day.month + 1 > 12) {
-					d = { ...day, month: 1, fullDayString: getFullDayString(day.year + 1, 1, day.index) };
-				} else {
-					d = {
-						...day,
-						month: day.month + 1,
-						fullDayString: getFullDayString(day.year, day.month + 1, day.index),
-					};
-				}
-			} else {
-				if (day.month - 1 === 0) {
-					d = { ...day, month: 12, fullDayString: getFullDayString(day.year - 1, 12, day.index) };
-				} else {
-					d = {
-						...day,
-						month: day.month - 1,
-						fullDayString: getFullDayString(day.year, day.month - 1, day.index),
-					};
-				}
-			}
-			setSelectedDay(d);
-			console.log(d);
-		}
-	};
-	/***
-	 *
-	 *
-	 */
-	const getFullDayString = (year, month, day) => {
-		return `${year}-${month}-${day}`;
-	};
-
-	/** */
-	const getBorderRadius = e => {
-		if (e.startsThisDay) {
-			return '4px 0 0 4px';
-		} else if (e.endsThisDay) {
-			return '0 4px  4px 0';
-		} else {
-			return '0';
-		}
-	};
-
-	/********
-	 *
-	 */
-	return daysOfMonth.map((dm, i) => {
-		let fullDayString = getFullDayString(year, month + 1, dm.dayIndex);
-		let isToday = moment().isSame(fullDayString, 'day');
-
-		let day = {
-			index: dm.dayIndex,
-			month: month + 1,
-			year: year,
-			fullDayString,
-		};
-
-		/**
-		 * custom events
-		 */
-
-		let evts = events
-			.map((e, i) => {
-				return { ...e, offestY: i };
-			})
-			.filter(event => {
-				if (
-					moment(event.startDate).isSame(day.fullDayString, 'day') ||
-					moment(event.endDate).isSame(day.fullDayString, 'day') ||
-					(moment(event.startDate).isBefore(day.fullDayString, 'day') &&
-						moment(event.endDate).isAfter(day.fullDayString, 'day'))
-				) {
-					return event;
-				}
-				return null;
-			});
-
-		evts = evts.map(event => {
-			if (moment(event.startDate).isSame(day.fullDayString, 'day')) {
-				return { ...event, startsThisDay: true };
-			} else if (moment(event.endDate).isSame(day.fullDayString, 'day')) {
-				return { ...event, endsThisDay: true };
-			}
-			return event;
-		});
-
-		/**
-		 *
-		 * return JSX template
-		 */
-		return (
-			<div
-				onClick={() => selectDay(day, dm.belongsToThisMonth)}
-				key={`dm${dm}${i}`}
-				className={`spring-calendar-day ${
-					dm.belongsToThisMonth ? 'spring-calendar-day-in-month' : 'spring-calendar-day-out-month'
-				} 
-            `}
-			>
-				<div
-					className={`${
-						isToday ? 'spring-calendar-today  spring-centered-content' : ''
-					}  spring-centered-content'`}
-				>
-					<span>{dm.dayIndex}</span>
-					{evts.length > 0 && !extended && (
-						<sup>
-							<div className="spring-calendar-day-events-count">{evts.length}</div>
-						</sup>
-					)}
-					{extended && evts.length > 0 && (
-						<ul className="spring-calendar-day-events">
-							{evts.map(
-								(e, i) =>
-									i < 3 && (
-										<li
-											className="spring-calendar-event"
-											key={i}
-											style={{
-												top: `${e.offestY * 24 + 24}px`,
-												borderRadius: getBorderRadius(e),
-											}}
-										>
-											{e.startsThisDay ? e.title : ''}
-										</li>
-									)
-							)}
-						</ul>
-					)}
-				</div>
-			</div>
-		);
-	});
+								{indexDayToShowEvents === dayIndex && day.events.length > 0 && (
+									<div className="sc-more-events-wrp">
+										<div className="sc-more-events">
+											<div className="sc-events-detail">
+												<div className="sc-events-detail-day">{day.localeFormat}</div>
+												{day.events.map((e, i) => (
+													<div className="sc-event-detail" key={i}>
+														<div className="sc-event-detail-time" key={i}>
+															<div>{e.startTime}</div>
+															<div>{e.endTime}</div>
+														</div>
+														<div className="sc-event-detail-title">{e.title}</div>
+													</div>
+												))}
+											</div>
+										</div>
+									</div>
+								)}
+							</div>
+						)}
+						
+					</div>
+				);
+			})}
+		</>
+	);
 };
 
 export default Days;

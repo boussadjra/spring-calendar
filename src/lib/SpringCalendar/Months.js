@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
-import CalendarContext from './CalendarContext';
+import React from 'react';
 import Month from './Month';
-const Months = () => {
-	const { months } = useContext(CalendarContext);
-
+const Months = ({months}) => {
 	return (
 		<React.Fragment>
 			{months.map((month, i) => {
-				return <Month month={month} key={`m${i}`} />;
+				return <Month month={month}  key={`m${i}`} />;
 			})}
 		</React.Fragment>
 	);

@@ -85,18 +85,18 @@ var Hours = function Hours(_ref) {
   */
 	return _react2.default.createElement(
 		'div',
-		{ className: 'spring-calendar-hours-wrapper' },
+		{ className: 'sc-hours-wrapper' },
 		dayHours.map(function (hour, i) {
 			return _react2.default.createElement(
 				'div',
-				{ key: 'h' + i, className: 'spring-calendar-hour' },
+				{ key: 'h' + i, className: 'sc-hour' },
 				hour.label
 			);
 		}),
 		customEvents.map(function (event, k) {
 			return _react2.default.createElement(
 				'div',
-				{ key: 'e' + k, style: event.style, className: 'spring-calendar-event' },
+				{ key: 'e' + k, style: event.style, className: 'sc-event' },
 				event.title
 			);
 		})

@@ -24,7 +24,8 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #fff;
+    background: inherit;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -32,7 +33,7 @@ body {
     border-radius: 5px;
 }
 
-.spring-calendar-wrapper {
+.sc-wrapper {
     height: 100%;
     width: 100%;
     background: rgb(219, 219, 223);
@@ -46,7 +47,7 @@ body {
     padding: 20px;
 }
 
-.spring-calendar-year-wrapper {
+.sc-year-wrapper {
     grid-area: header;
     width: 100%;
     line-height: 64px;
@@ -58,7 +59,7 @@ body {
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    .spring-calendar-year {
+    .sc-year {
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -67,13 +68,13 @@ body {
         height: 48px;
         border-radius: 4px;
     }
-    .spring-calendar-month-year {
+    .sc-month-year {
         width: 300px;
     }
-    .spring-calendar-toggle {
+    .sc-toggle {
         display: flex;
         /* justify-self: flex-end; */
-        width: 300px;
+        // width: 300px;
         box-shadow: 0 1px 2px #aaa;
         .spring-button {
             cursor: pointer;
@@ -110,7 +111,7 @@ body {
     grid-gap: 20px;
 }
 
-.spring-calendar-month-wrapper {
+.sc-month-wrapper {
     height: 200px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -118,7 +119,7 @@ body {
     background: #f3f3f3;
     border-radius: 4px;
     box-shadow: 1px 1px 5px #aaa;
-    .spring-calendar-month {
+    .sc-month {
         cursor: pointer;
         grid-column-start: 1;
         grid-column-end: 8;
@@ -130,35 +131,40 @@ body {
         text-transform: uppercase;
         border-radius: 4px 4px 0 0;
     }
-    .spring-calendar-weekday {
+    .sc-weekday {
         font-size: 9pt;
         text-align: center;
         color: #222;
         padding: 4px;
         text-transform: uppercase;
     }
-    .spring-calendar-day {
+    .sc-day {
         font-size: 9pt;
         cursor: pointer;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center!important;
         position: relative;
-        &:hover {
-            color: inherit;
-            filter: brightness(120%);
-        }
+        // &:hover {
+        //     color: inherit;
+        //     filter: brightness(120%);
+        // }
     }
-    .spring-calendar-day-in-month {
+    .sc-day-in-month {
         color: #6d6c6c;
         font-weight: bolder;
     }
-    .spring-calendar-today {
-        background: #000e9c;
-        color: #46eeb3;
-        height: 32px;
-        width: 32px;
-        border-radius: 50%;
+    .sc-today {
+        box-sizing: border-box;
+        border-bottom: 4px solid #000e9c;
+        /* color: #46eeb3; */
+        /* height: 24px; */
+        display: flex;
+        /* width: 24px; */
+        /* border-radius: 50%; */
+        position: relative;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -169,7 +175,7 @@ body {
     position: relative;
 }
 
-.spring-calendar-month-wrapper-extended {
+.sc-month-wrapper-extended {
     position: relative;
     height: 100%;
     grid-template-rows: 64px 48px repeat(6, 128px);
@@ -177,17 +183,17 @@ body {
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 5;
-    .spring-calendar-month {
+    .sc-month {
         height: 100%;
         font-size: 12pt;
     }
-    .spring-calendar-weekday {
+    .sc-weekday {
         font-size: 11pt;
         text-align: center;
         color: #222;
         padding: 4px;
     }
-    .spring-calendar-day {
+    .sc-day {
         font-size: 9pt;
         text-align: center;
         border-top: 1px solid #d3d2d2;
@@ -196,38 +202,193 @@ body {
         align-items: flex-start;
         padding-top: 4px;
         position: relative;
-        .spring-calendar-day-events {
+        .sc-day-events {
             display: grid;
             grid-template-rows: 1fr 1fr 1fr;
             row-gap: 4px;
-            height: 76px;
+            // height: 92px;
             overflow: hidden;
+            width: 100%;
+            .sc-more-events-wrp {
+                position: absolute;
+                z-index: 200;
+                left: 50%;
+                top: 50%;
+                .sc-more-events {
+                    overflow-y: auto;
+                    position: absolute;
+                    padding: 24px 12px 12px 12px;
+                    width: 360px;
+                    box-shadow: 1px 4px 19px #aaa;
+                    z-index: 2000;
+                    background: #f3f3f3;
+                    //clip-path: polygon(24% 0, 28% 6%, 100% 6%, 100% 66%, 100% 100%, 56% 100%, 0 100%, 0 55%, 0 6%, 19% 6%);
+                    max-height: 266px;
+                    border: 1px solid var(--primary);
+                    border-radius: 4px;
+                    .sc-events-detail {
+                        display: grid;
+                        grid-gap: 4px;
+                        .sc-events-detail-day {
+                            padding: 10px;
+                            font-size: 12pt;
+                            background: #d2d2d0cc;
+                            position: sticky;
+                            top: -24px;
+                        }
+                        .sc-event-detail {
+                            display: grid;
+                            grid-template-columns: 84px auto;
+                            border-radius: 6px;
+                            box-shadow: 1px 1px 2px #aaa;
+                            .sc-event-detail-time {
+                                padding: 8px;
+                                border-left: 4px var(--primary) solid;
+                                color: var(--primary);
+                                border-radius: 6px;
+                            }
+                            .sc-event-detail-title {
+                                padding: 8px;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        .spring-calendar-event {
+        .sc-event {
             list-style: none;
             color: white;
             background: var(--primary);
             padding: 4px;
-            // border-radius: 4px;
-            position: absolute;
-            left: 0px;
-            width: calc(100% + 1px);
+            border-radius: 4px;
+            height: 24px;
+            width: 100%;
             &:empty {
                 height: 22px;
             }
+            &-more {
+                width: auto;
+                &-indicator {
+                    color: red;
+                }
+            }
         }
     }
-    .spring-calendar-day-in-month {
-        color: #6d6c6c;
-        font-weight: bolder;
-    }
-    .spring-calendar-today {
-        height: 40px;
-        width: 40px;
+    .sc-today {
+        box-sizing: border-box;
+        border-bottom: 4px solid #000e9c;
+        /* color: #46eeb3; */
+        /* height: 24px; */
+        display: flex;
+        /* width: 24px; */
+        /* border-radius: 50%; */
+        position: relative;
+        justify-content: center;
+        align-items: center;
     }
 }
 
-.spring-calendar-day-events-count {
+.sc-day-in-month {
+    color: #6d6c6c;
+    font-weight: bolder;
+}
+
+
+/**
+* 
+* * ***********
+* * ***********
+* * ***********
+* * full day
+* * ***********
+* * ***********
+*/
+
+.sc-full-day {
+    background-color: transparent;
+    background-image: linear-gradient(0deg, transparent 24%, #efefef 25%, #efefef 26%, transparent 27%, transparent 74%, #efefef 75%, #efefef 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, #efefef 25%, #efefef 26%, transparent 27%, transparent 74%, #efefef 75%, #efefef 76%, transparent 77%, transparent);
+    height: 100%;
+    background-size: 64px 64px;
+    display: grid;
+    grid-template-rows: repeat(24, 32px);
+    grid-template-columns: 50px 40px auto;
+    &-hour,
+    &-time-line-item {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        position: relative;
+    }
+    &-time-line-item {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        &:last-child {
+            .sc-full-day-time-line-circle:empty::before {
+                height: 0;
+            }
+        }
+    }
+    &-time-line-circle:empty {
+        background-color: var(--primary);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        &::before {
+            display: block;
+            content: '';
+            box-sizing: border-box;
+            height: 32px;
+            width: 2px;
+            background: var(--primary);
+            z-index: 2;
+        }
+    }
+    /** full day events **/
+    &-events {
+        grid-area: 1/3/25/4;
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-rows: repeat(24, 32px);
+        grid-column-gap: 2px;
+    }
+    &-event {
+        padding: 10px;
+        position: relative;
+        background: var(--primary);
+        color: white;
+        border-radius: 0 4px 4px 0;
+        margin-top: 10px;
+        border-left: 3px solid #ff304f;
+        min-height: 40px;
+        height: calc(100% - 22px);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        white-space: nowrap;
+        width: 100%;
+        box-shadow: 1px 1px 2px #aaa;
+        // align-self: center;
+        &-time {
+            color: white;
+            font-size: 9pt;
+        }
+        &-title {
+            display: flex;
+            align-items: center;
+        }
+    }
+    /*******************/
+}
+
+.sc-day-events-count {
     background: #e14444;
     color: #ffffff;
     width: 16px;
@@ -242,7 +403,7 @@ body {
     box-shadow: 1px 1px 10px rgb(156, 154, 154);
 }
 
-.spring-calendar-hours-wrapper {
+.sc-hours-wrapper {
     background-color: transparent;
     background-image: linear-gradient(0deg, transparent 24%, #efefef 25%, #efefef 26%, transparent 27%, transparent 74%, #efefef 75%, #efefef 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, #efefef 25%, #efefef 26%, transparent 27%, transparent 74%, #efefef 75%, #efefef 76%, transparent 77%, transparent);
     height: 100%;
@@ -259,7 +420,7 @@ body {
     // background: #f3f3f3;
     border-radius: 4px;
     box-shadow: 1px 1px 5px #aaa;
-    .spring-calendar-hour {
+    .sc-hour {
         grid-column-start: 1;
         grid-column-end: 1;
         display: flex;
@@ -300,7 +461,7 @@ body {
             z-index: 2;
         }
     }
-    .spring-calendar-event {
+    .sc-event {
         grid-column-start: 3;
         white-space: nowrap;
         height: 100px;
