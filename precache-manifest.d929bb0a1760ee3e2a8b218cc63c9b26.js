@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "86e724e1eea564aae3eb444eed219700",
+    "revision": "506877ffdaa1449bdddde563bbbf451c",
     "url": "/spring-calendar/index.html"
   },
   {
-    "revision": "5c15e100861cc5d35eb8",
-    "url": "/spring-calendar/static/css/main.1b308071.chunk.css"
+    "revision": "088e68200cf32aed82f4",
+    "url": "/spring-calendar/static/css/main.819492a2.chunk.css"
   },
   {
     "revision": "5d865a46afa81af1ad15",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spring-calendar/static/js/2.e9f65599.chunk.js.LICENSE"
   },
   {
-    "revision": "5c15e100861cc5d35eb8",
-    "url": "/spring-calendar/static/js/main.03710fb4.chunk.js"
+    "revision": "088e68200cf32aed82f4",
+    "url": "/spring-calendar/static/js/main.4ef3e567.chunk.js"
   },
   {
     "revision": "fe96d328bce357ce3436",
