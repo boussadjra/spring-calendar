@@ -21,7 +21,8 @@ function useCalendar(thisYear,locale, events) {
 	 */
 
 	useEffect(() => {
-		moment.locale(locale);console.log(locale)
+		moment.locale(locale);
+		
 
 		changeView('day');
 		

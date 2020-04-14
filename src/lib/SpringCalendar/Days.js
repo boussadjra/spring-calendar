@@ -15,7 +15,7 @@ const Days = ({ month }) => {
 					<div
 						key={day.index}
 						onClick={event => {
-							window.target = event.target;
+							
 
 							if (month.extended) {
 								dayIndex === indexDayToShowEvents

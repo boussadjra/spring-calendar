@@ -7,7 +7,7 @@
 
  `npm install spring-calendar`
 
-
+> For Vue.js developers please check this [`repository`](https://github.com/boussadjra/vue-spring-calendar)
 ## Usage
 
 ```js 
@@ -33,4 +33,6 @@ export default App
 
 ## Demo 
 
-[Spring Calendar demo](https://boussadjra.github.io/spring-calendar/)
+[React Spring Calendar demo](https://boussadjra.github.io/spring-calendar/)
+
+[Vue Spring Calendar demo](https://boussadjra.github.io/vue-spring-calendar/)

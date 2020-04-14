@@ -49,12 +49,12 @@ let events=[
     },
     {
         title:'Event 10',
-        startDate:'2020-04-09 19:00',
+        startDate:'2020-04-09 09:00',
         endDate:'2020-04-09 20:00',
     }
 ]
 
 let color= (Math.random()*1000000).toFixed()
 // const App =()=> <SpringCalendar locale="ar-ma" events={events} color={`#${color}`} />;
-const App =()=> <SpringCalendar locale="en" events={events} color="#3a0751" />;
+const App =()=> <SpringCalendar locale="en" events={events} color="#5118ac" />;
 export default App

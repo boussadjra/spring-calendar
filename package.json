@@ -1,7 +1,9 @@
 {
+    "author": "BRAHIM BOUSSADJRA",
     "name": "spring-calendar",
     "version": "0.3.0",
     "private": false,
+    "description": "Full calendar based on React.js",
     "homepage": "http://boussadjra.github.io/spring-calendar",
     "main": "dist/index.js",
     "module": "dist/index.js",

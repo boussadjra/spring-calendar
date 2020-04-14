@@ -33,6 +33,24 @@ body {
     border-radius: 5px;
 }
 
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .sc-wrapper {
     height: 100%;
     width: 100%;
@@ -226,9 +244,11 @@ body {
                     max-height: 266px;
                     border: 1px solid var(--primary);
                     border-radius: 4px;
+                    animation: 1s ease-out 0s 1 fade;
                     .sc-events-detail {
                         display: grid;
                         grid-gap: 4px;
+                        animation: 1s ease-out 0s 1 slideInFromBottom;
                         .sc-events-detail-day {
                             padding: 10px;
                             font-size: 12pt;
@@ -375,7 +395,7 @@ body {
         white-space: nowrap;
         width: 100%;
         box-shadow: 1px 1px 2px #aaa;
-        // align-self: center;
+        animation: 1s ease-out 0s 1 slideInFromBottom;
         &-time {
             color: white;
             font-size: 9pt;

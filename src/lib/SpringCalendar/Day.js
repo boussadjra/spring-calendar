@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Day = ({ day }) => {
-	console.log(day);
+	
 	return (
 		<div className="sc-full-day">
 			{day.hours &&
