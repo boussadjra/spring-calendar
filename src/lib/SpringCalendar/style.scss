@@ -508,6 +508,135 @@ body {
     }
 }
 
+
+/***********************************/
+
+
+/*************Week style**********************/
+
+
+/***********************************/
+
+.sc-week-wrapper {
+    display: grid;
+    grid-template-columns: 64px auto;
+    grid-template-rows: 48px auto;
+    background: #f3f3f3;
+    border-radius: 4px;
+    -webkit-box-shadow: 1px 1px 5px #aaa;
+    box-shadow: 1px 1px 5px #aaa;
+    position: relative;
+    height: 100%;
+    background-color: transparent;
+    background-image: linear-gradient( 0deg, transparent 24%, #efefef 25%, #efefef 26%, transparent 27%, transparent 74%, #efefef 75%, #efefef 76%, transparent 77%, transparent)
+    /*,
+      linear-gradient(
+        90deg,
+        transparent 24%,
+        #efefef 25%,
+        #efefef 26%,
+        transparent 27%,
+        transparent 74%,
+        #efefef 75%,
+        #efefef 76%,
+        transparent 77%,
+        transparent
+      )*/
+    ;
+    background-size: 64px 64px;
+    .sc-weekdays {
+        background: var(--primary);
+        color: white;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        .sc-weekday {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            &:not(:last-child) {
+                border-right: thin solid #7f7d82;
+            }
+            &-date {
+                opacity: 0.7;
+                font-size: 10pt;
+            }
+        }
+    }
+    .sc-week-hours-wrap {
+        grid-column: 1/2;
+        grid-row: 2/3;
+        display: inherit;
+        grid-template-columns: 64px;
+        grid-template-rows: repeat(24, 32px);
+    }
+    .sc-week-hours {
+        grid-row: 1/25;
+        background: var(--primary);
+        color: aliceblue;
+        .sc-week-hour {
+            border-bottom: thin solid #7f7d82;
+            grid-column-start: 1;
+            grid-column-end: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 32px;
+            position: relative;
+        }
+    }
+    .sc-week-events-wrap {
+        display: grid;
+        grid-template-rows: repeat(24, 32px);
+        grid-template-columns: repeat(7, 1fr);
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        position: relative;
+        .sc-week-events {
+            display: flex;
+            max-width: 100%;
+            position: relative;
+            border-left: thin solid #fff;
+            .sc-week-event {
+                color: white;
+                position: absolute;
+                width: 72px;
+                z-index: 4;
+                cursor: pointer;
+                &-time {
+                    color: white;
+                    font-size: 9pt;
+                    padding: 4px;
+                }
+                &-title {
+                    display: flex;
+                    align-items: center;
+                    padding: 4px;
+                    font-size: 9pt;
+                }
+                &-focused,
+                &:hover {
+                    z-index: 10;
+                    // left: 0;
+                    border: thin dashed #fff;
+                    min-height: max-content;
+                }
+            }
+        }
+    }
+}
+
+
+/***********************************/
+
+
+/***********************************/
+
 .spring-btn {
     outline: none;
     background: var(--primary);

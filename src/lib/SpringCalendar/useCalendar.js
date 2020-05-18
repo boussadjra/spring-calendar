@@ -8,24 +8,25 @@ import { useState, useEffect } from 'react';
  *
  */
 
-function useCalendar(thisYear,locale, events) {
+function useCalendar(thisYear, locale, events, defaultType) {
 	window.moment = moment;
 	/***
 	 * useState hooooook
 	 */
 
 	const [selectedDate, setSelectedDate] = useState({ type: 'year', value: new Date().getFullYear(), default: true });
-
+	const [weekdays, setWeekdays] = useState([]);
+	const [weekdaysShort, setWeekdaysShort] = useState([]);
 	/***
 	 * useEffect hoook
 	 */
 
 	useEffect(() => {
-		moment.locale(locale);
-		
+		moment.updateLocale(locale);
 
-		changeView('day');
-		
+		setWeekdays(moment.weekdays());
+		setWeekdaysShort(moment.weekdaysShort());
+		changeView(defaultType);
 	}, []);
 
 	/****
@@ -53,12 +54,41 @@ function useCalendar(thisYear,locale, events) {
 
 		return getMonth(_year, index, label);
 	};
+	/********* */
+	const generateWeek = _date => {
+		window._date = _date;
+
+		let _week = {
+			weekdays: moment.weekdays().map((dw, i) => {
+				let date = _date.subtract(_date.weekday() - i, 'day').date();
+				let _month = _date.month() + 1;
+				let _year = _date.year();
+				let _day = {
+					index: date,
+					label: `${_year}-${_month}-${date}`,
+				};
+
+				return {
+					label: dw,
+					date,
+					month: _month,
+					year: _year,
+					statOfWeek: _date.subtract(_date.weekday(), 'day'),
+					events: getEvents(_day),
+				};
+			}),
+			hours: getHours(),
+		};
+
+		return _week;
+	};
+	/** */
 	/******* */
 	const getMonth = (_year, index, label) => {
 		let fullLabel = `${_year}-${index}`;
 		let date = moment(fullLabel);
 
-		let month = { label, fullLabel, index, weekday: date.weekday(), weekdaysShort: moment.weekdaysShort() };
+		let month = { label, fullLabel, index, weekday: date.weekday(), weekdaysShort, weekdays };
 
 		month.days = [...Array(date.daysInMonth())].map((_, dayIndex) => {
 			return getDay({
@@ -75,7 +105,7 @@ function useCalendar(thisYear,locale, events) {
 		day.localeFormat = moment(day.label).format('LL');
 		day.hours = getHours();
 		day.events = getEvents(day);
-		day.isToday=moment().isSame(day.label, 'day');
+		day.isToday = moment().isSame(day.label, 'day');
 		return day;
 	};
 	/**
@@ -89,6 +119,7 @@ function useCalendar(thisYear,locale, events) {
 		return evts.map(event => {
 			event.startTime = moment(event.startDate).format('hh:mm A');
 			event.endTime = moment(event.endDate).format('hh:mm A');
+			event.weekday = moment(day.label).weekday();
 			return event;
 		});
 	};
@@ -109,7 +140,7 @@ function useCalendar(thisYear,locale, events) {
 	 * @param {boolean} isDefault the default value is the current date
 	 * @param {boolean} toggle the view is changed via a toggle button
 	 */
-	const changeView = (type, value, isDefault = true, toggle=false) => {
+	const changeView = (type, value, isDefault = true, toggle = false) => {
 		/**
 		 * the following date value by default equals to the current
 		 *  year for example 2020-01-01
@@ -121,7 +152,6 @@ function useCalendar(thisYear,locale, events) {
 		 *  button which should show the current month/day since the default
 		 * value refers to the year start
 		 */
-
 
 		date = toggle && !isDefault && !moment().isSame(moment(value), type) ? moment() : date;
 
@@ -136,8 +166,15 @@ function useCalendar(thisYear,locale, events) {
 				});
 				break;
 			case 'week':
-				setSelectedDate({ ...selectedDate, type: 'week', value: date.format('MMMM YYYY') });
-
+				setSelectedDate({
+					...selectedDate,
+					type: 'week',
+					value: (date => {
+						let _date = date.subtract(date.weekday(), 'day');
+						return _date.format('LL');
+					})(date), //we refer the week value to its start date
+					week: generateWeek(date),
+				});
 				break;
 			case 'month':
 				setSelectedDate({
@@ -163,7 +200,6 @@ function useCalendar(thisYear,locale, events) {
 	};
 	const gotoNext = () => {
 		let next = moment(selectedDate.value).add(1, selectedDate.type + 's');
-	
 
 		changeView(selectedDate.type, next, false);
 	};
@@ -176,7 +212,7 @@ function useCalendar(thisYear,locale, events) {
 	 *
 	 * return hoook methods
 	 */
-	return {  gotoNext, gotoPrev, selectedDate, changeView };
+	return { gotoNext, gotoPrev, selectedDate, changeView };
 }
 
 export default useCalendar;
