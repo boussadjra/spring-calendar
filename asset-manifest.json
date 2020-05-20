@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/spring-calendar/static/css/main.f6212a8e.chunk.css",
-    "main.js": "/spring-calendar/static/js/main.c6950a98.chunk.js",
-    "main.js.map": "/spring-calendar/static/js/main.c6950a98.chunk.js.map",
+    "main.css": "/spring-calendar/static/css/main.2e864af4.chunk.css",
+    "main.js": "/spring-calendar/static/js/main.770b38c7.chunk.js",
+    "main.js.map": "/spring-calendar/static/js/main.770b38c7.chunk.js.map",
     "runtime-main.js": "/spring-calendar/static/js/runtime-main.ced4f73a.js",
     "runtime-main.js.map": "/spring-calendar/static/js/runtime-main.ced4f73a.js.map",
     "static/js/2.96a056aa.chunk.js": "/spring-calendar/static/js/2.96a056aa.chunk.js",
     "static/js/2.96a056aa.chunk.js.map": "/spring-calendar/static/js/2.96a056aa.chunk.js.map",
     "index.html": "/spring-calendar/index.html",
-    "precache-manifest.a84515d8f4a72ef10c1265442f273d77.js": "/spring-calendar/precache-manifest.a84515d8f4a72ef10c1265442f273d77.js",
+    "precache-manifest.bfcf82e8e993661747309030c2a9e4d6.js": "/spring-calendar/precache-manifest.bfcf82e8e993661747309030c2a9e4d6.js",
     "service-worker.js": "/spring-calendar/service-worker.js",
-    "static/css/main.f6212a8e.chunk.css.map": "/spring-calendar/static/css/main.f6212a8e.chunk.css.map",
+    "static/css/main.2e864af4.chunk.css.map": "/spring-calendar/static/css/main.2e864af4.chunk.css.map",
     "static/js/2.96a056aa.chunk.js.LICENSE": "/spring-calendar/static/js/2.96a056aa.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.ced4f73a.js",
     "static/js/2.96a056aa.chunk.js",
-    "static/css/main.f6212a8e.chunk.css",
-    "static/js/main.c6950a98.chunk.js"
+    "static/css/main.2e864af4.chunk.css",
+    "static/js/main.770b38c7.chunk.js"
   ]
 }
