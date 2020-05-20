@@ -70,6 +70,7 @@ function useCalendar(thisYear, locale, events, defaultType) {
 
 				return {
 					label: dw,
+					labelShort:moment.weekdaysShort()[i],
 					date,
 					month: _month,
 					year: _year,

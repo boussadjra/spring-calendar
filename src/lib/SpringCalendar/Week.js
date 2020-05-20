@@ -73,7 +73,7 @@ const Week = ({ week }) => {
 				{week.weekdays.map((weekday, j) => {
 					return (
 						<div className="sc-weekday" key={'fwd' + j}>
-							<div className="sc-weekday-label">{weekday.label}</div>
+							<div className="sc-weekday-label" data-full={weekday.label} data-short={weekday.labelShort}></div>
 							<div className="sc-weekday-date">{weekday.date}</div>
 						</div>
 					);
