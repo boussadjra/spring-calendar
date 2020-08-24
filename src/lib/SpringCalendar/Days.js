@@ -6,7 +6,7 @@ const Days = ({ month }) => {
 	const [indexDayToShowEvents, setIndexDayToShowEvents] = useState(-1);
 
 	return (
-		<>
+		<React.Fragment>
 			{month.weekday > 0 && (
 				<div className="sc-day sc-day-in-month" style={{ gridColumnStart: `span ${month.weekday}` }} />
 			)}
@@ -71,7 +71,7 @@ const Days = ({ month }) => {
 					</div>
 				);
 			})}
-		</>
+		</React.Fragment>
 	);
 };
 
