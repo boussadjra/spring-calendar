@@ -17,13 +17,13 @@ import SpringCalendar from 'spring-calendar';
 let events=[
     {
         title:'Event 1',
-        startDate:'2020-01-15 08:00',
-        endDate:'2020-01-15 10:00',
+        startDate:'2020-08-15 08:00',
+        endDate:'2020-08-15 10:00',
     },
     {
         title:'Event 3',
-        startDate:'2020-01-15 09:00',
-        endDate:'2020-01-15 12:00',
+        startDate:'2020-08-15 09:00',
+        endDate:'2020-08-15 12:00',
     }
    
 ]
@@ -34,5 +34,7 @@ export default App
 ## Demo 
 
 [React Spring Calendar demo](https://boussadjra.github.io/spring-calendar/)
+
+[Boilerplate on codesandbox](https://codesandbox.io/s/great-mestorf-s3w2q?file=/src/App.js)
 
 [Vue Spring Calendar demo](https://boussadjra.github.io/vue-spring-calendar/)
