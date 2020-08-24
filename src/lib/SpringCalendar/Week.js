@@ -35,9 +35,6 @@ const Week = ({ week }) => {
 
 	useEffect(() => {
 		function getEventsByHour(hour, day) {
-			console.log('--------------------');
-			console.log(events);
-			console.log('--------------------');
 			let _events = events.filter(e => {
 				let startHour = new Date(e.startDate).getHours();
 				return startHour === hour && day === e.weekday;
@@ -52,7 +49,7 @@ const Week = ({ week }) => {
 		let _mappedEvents = [];
 
 		if (events.length > 0) {
-			for (let h = 1; h <= 24; h++) {
+			for (let h = 0; h < 24; h++) {
 				for (let j = 0; j < 7; j++) {
 					let filteredEvents = getEventsByHour(h, j);
 
@@ -73,7 +70,11 @@ const Week = ({ week }) => {
 				{week.weekdays.map((weekday, j) => {
 					return (
 						<div className="sc-weekday" key={'fwd' + j}>
-							<div className="sc-weekday-label" data-full={weekday.label} data-short={weekday.labelShort}></div>
+							<div
+								className="sc-weekday-label"
+								data-full={weekday.label}
+								data-short={weekday.labelShort}
+							/>
 							<div className="sc-weekday-date">{weekday.date}</div>
 						</div>
 					);
@@ -105,13 +106,13 @@ const Week = ({ week }) => {
 										onClick={() => focusOnEvent(item)}
 									>
 										{item.title === focusedEvent.title ? (
-											<>
+											<React.Fragment>
 												<div className="sc-week-event-time">
 													<div>{item.startTime}</div>
 													<div>{item.endTime}</div>
 												</div>
 												<div className="sc-week-event-title">{item.title}</div>
-											</>
+											</React.Fragment>
 										) : (
 											<div className="sc-week-event-title">{item.title}</div>
 										)}
